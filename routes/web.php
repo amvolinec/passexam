@@ -41,3 +41,7 @@ Route::get('/user/{id?}', function ($id = null) {
 Route::get('/test/middleware', function () {
     return 'this chould call the LogMyRoute middleware!;';
 })->middleware('logmyroute');
+
+Route::resources([
+    'salary' => 'SalaryController',
+]);
