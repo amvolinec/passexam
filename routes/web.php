@@ -11,6 +11,7 @@
 |
 */
 
+use Illuminate\Foundation\Support\Providers;
 
 Route::get('/', 'StartController')->name('start');
 
@@ -44,4 +45,14 @@ Route::get('/test/middleware', function () {
 
 Route::resources([
     'salary' => 'SalaryController',
+    'company' => 'CompanyController',
 ]);
+
+
+Route::get('/company/name/{name}', 'CompanyController@name')->name('company.name');
+
+Route::get('/hello', function () {
+    return response()->caps('foo');
+});
+
+Route::get('channels', 'ChannelController@index');

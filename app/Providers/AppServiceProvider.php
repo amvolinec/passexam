@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Channel;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+//        View::share('channels', Channel::orderBy('name')->get());
+        View::composer(['channel.index'], function ($view) {
+            $view->with('channels', Channel::orderBy('name')->get());
+        });
     }
 }

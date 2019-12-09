@@ -7,7 +7,6 @@
                 <div class="card">
                     <div class="card-header">
                         Users
-                        <a class="dropdown-item" href="{{ route('company.create') }}">Create user</a>
                     </div>
 
                     <div class="card-body">
@@ -18,9 +17,8 @@
                                 {{ session('status') }}
                             </div>
                         @endif
+
                         @auth
-
-
                             <table class="table table-sm">
                                 <thead class="thead-dark">
                                 <tr>

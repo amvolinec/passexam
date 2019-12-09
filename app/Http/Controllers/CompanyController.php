@@ -4,9 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Company;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 class CompanyController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'logmyroute']);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -24,7 +31,9 @@ class CompanyController extends Controller
      */
     public function create()
     {
-        //
+        $user_id = Auth::id();
+        Cookie::queue('author', 'Igor', 5);
+        return view('company.create', compact('user_id'));
     }
 
     /**
@@ -35,7 +44,9 @@ class CompanyController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $name = $request->get('name');
+        dd($name);
+        return redirect()->route('company.index');
     }
 
     /**
@@ -81,5 +92,10 @@ class CompanyController extends Controller
     public function destroy(Company $company)
     {
         //
+    }
+
+    public function name(Request $request, $name)
+    {
+        return 'The name is : ' . $name;
     }
 }
